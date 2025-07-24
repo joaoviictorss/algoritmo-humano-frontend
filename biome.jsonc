@@ -8,6 +8,9 @@
       "nursery": {
         "noUnknownAtRule": "info"
       },
+      "suspicious": {
+        "noEmptyInterface": "off"
+      },
       "performance": {
         "noNamespaceImport": "off"
       }
