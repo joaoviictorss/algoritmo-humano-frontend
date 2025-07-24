@@ -7,6 +7,9 @@
     "rules": {
       "nursery": {
         "noUnknownAtRule": "info"
+      },
+      "performance": {
+        "noNamespaceImport": "off"
       }
     }
   }
