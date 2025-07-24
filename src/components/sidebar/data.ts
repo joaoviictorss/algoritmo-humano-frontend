@@ -1,7 +1,12 @@
+import type { IUser } from "@/types/user";
+import type { DropdownOption } from "../dropdown";
+
 export interface ISidebarProps {}
 
 export interface ISidebarData extends ISidebarProps {
   items: ISidebarItem[];
+  user?: IUser | null;
+  userOptions: DropdownOption[];
 }
 
 interface ISidebarItem {

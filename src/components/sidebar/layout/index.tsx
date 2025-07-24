@@ -1,8 +1,9 @@
 "use client";
 
-import { LogIn } from "lucide-react";
+import { LogIn, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Dropdown } from "@/components/dropdown";
 import {
   Sidebar as ShadSidebar,
   SidebarContent,
@@ -17,7 +18,7 @@ import {
 } from "@/components/ui/sidebar";
 import type { ISidebarData } from "../data";
 
-export const Sidebar = ({ items }: ISidebarData) => {
+export const Sidebar = ({ items, user, userOptions }: ISidebarData) => {
   return (
     <ShadSidebar>
       <SidebarContent>
@@ -60,13 +61,33 @@ export const Sidebar = ({ items }: ISidebarData) => {
 
       <SidebarFooter>
         <SidebarMenuButton asChild>
-          <Link
-            className="flex gap-3 font-medium text-sidebar-foreground/80"
-            href={"sign-in"}
-          >
-            <LogIn />
-            <span>Fazer login</span>
-          </Link>
+          {user ? (
+            <Dropdown align="center" options={userOptions} side="top">
+              <SidebarMenuButton>
+                <div className="flex size-7 items-center justify-center rounded-full bg-zinc-200 p-1.5">
+                  {user.avatar_url ? (
+                    <Image
+                      alt="Avatar"
+                      height={32}
+                      src={user.avatar_url}
+                      width={32}
+                    />
+                  ) : (
+                    <User size={32} />
+                  )}
+                </div>
+                {user.name}
+              </SidebarMenuButton>
+            </Dropdown>
+          ) : (
+            <Link
+              className="flex gap-3 font-medium text-sidebar-foreground/80"
+              href={"sign-in"}
+            >
+              <LogIn />
+              <span>Fazer login</span>
+            </Link>
+          )}
         </SidebarMenuButton>
       </SidebarFooter>
     </ShadSidebar>
