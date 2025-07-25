@@ -23,7 +23,7 @@ export default function Home() {
     handleNextPage,
     handlePreviousPage,
   } = useGetCourses({
-    initialLimit: 10,
+    initialLimit: 8,
     status: "ACTIVE",
   });
 
@@ -72,7 +72,7 @@ export default function Home() {
           >
             <ListFilter
               className={`transition-transform duration-300 ease-in-out ${
-                currentSortOrder === "desc" ? "rotate-180" : "rotate-0"
+                currentSortOrder === "asc" ? "rotate-180" : "rotate-0"
               }`}
               size={20}
             />
@@ -98,15 +98,15 @@ export default function Home() {
               </Link>
             ))}
       </div>
-
       {pagination && (
-        <Pagination
-          className="mt-8 ml-auto"
-          onNextPage={handleNextPage}
-          onPageChange={handlePageChange}
-          onPreviousPage={handlePreviousPage}
-          pagination={pagination}
-        />
+        <div className="flex w-full justify-end">
+          <Pagination
+            onNextPage={handleNextPage}
+            onPageChange={handlePageChange}
+            onPreviousPage={handlePreviousPage}
+            pagination={pagination}
+          />
+        </div>
       )}
     </div>
   );

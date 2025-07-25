@@ -87,7 +87,7 @@ export default function SignInPage() {
           </div>
 
           <Link
-            className="text-primary text-sm underline-offset-4 hover:underline"
+            className="text-primary text-sm"
             href="/"
           >
             Voltar para catálogo de cursos
