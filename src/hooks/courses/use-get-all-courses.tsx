@@ -4,15 +4,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { httpApi } from "@/infra/http/httpApi";
-import type { CourseStatus, CoursesResponse } from "@/types/course";
-
-interface GetCoursesProps {
-  title?: string;
-  status?: CourseStatus;
-  initialSortBy?: "title" | "createdAt" | "updatedAt" | "duration";
-  initialSortOrder?: "asc" | "desc";
-  initialLimit?: number;
-}
+import type { CoursesResponse, GetCoursesProps } from "@/types";
 
 export const useGetCourses = (props: GetCoursesProps = {}) => {
   const {

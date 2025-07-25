@@ -8,13 +8,14 @@ export interface Course {
   imageUrl: string | null;
   duration: number;
   status: CourseStatus;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
   author: {
     id: string;
     name: string | null;
     email: string;
   };
+  
 }
 
 export interface CoursesResponse {
@@ -27,4 +28,21 @@ export interface CoursesResponse {
     hasNext: boolean;
     hasPrev: boolean;
   };
+}
+
+export interface GetCoursesProps {
+  title?: string;
+  status?: CourseStatus;
+  initialSortBy?: "title" | "createdAt" | "updatedAt" | "duration";
+  initialSortOrder?: "asc" | "desc";
+  initialLimit?: number;
+}
+
+export interface GetMyCoursesProps {
+  title?: string;
+  status?: CourseStatus;
+}
+
+export interface MyCoursesResponse {
+  courses: Course[];
 }

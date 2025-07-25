@@ -26,7 +26,7 @@ export const Dropdown = ({
       <DropdownMenuContent align={align} className="w-56" side={side}>
         {options.map((option) => (
           <DropdownMenuItem
-            className={`flex w-full cursor-pointer items-center gap-2 ${
+            className={`flex w-full cursor-pointer items-center gap-2 hover:font-medium ${
               option.selected
                 ? "bg-accent font-medium text-accent-foreground"
                 : ""

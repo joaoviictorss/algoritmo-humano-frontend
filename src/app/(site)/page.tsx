@@ -62,7 +62,7 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="font-semibold text-xl">Cursos</h1>
+        <h1 className="font-semibold text-2xl">Cursos</h1>
 
         <div className="flex items-center space-x-2">
           <Button

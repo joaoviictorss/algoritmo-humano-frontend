@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut, MonitorPlay, Settings } from "lucide-react";
+import { LaptopMinimal, LogOut, MonitorPlay, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 import type { DropdownOption } from "@/components/dropdown";
 import { useAuth, useLogout } from "@/hooks";
@@ -12,6 +12,21 @@ export const Sidebar = (props: ISidebarProps) => {
   const { user } = useAuth();
 
   const { mutateAsync: logout } = useLogout();
+
+  const items = [
+    {
+      title: "Catálogo",
+      url: "/",
+      icon: <MonitorPlay />,
+      isActive: pathname === "/",
+    },
+    {
+      title: "Gerenciar meus cursos",
+      url: "/gerenciar-cursos",
+      icon: <LaptopMinimal />,
+      isActive: pathname === "/gerenciar-cursos",
+    },
+  ];
 
   const userOptions: DropdownOption[] = [
     {
@@ -25,15 +40,6 @@ export const Sidebar = (props: ISidebarProps) => {
       label: "Sair",
       action: logout,
       icon: <LogOut className="h-4 w-4" />,
-    },
-  ];
-
-  const items = [
-    {
-      title: "Catálogo",
-      url: "/",
-      icon: <MonitorPlay />,
-      isActive: pathname === "/",
     },
   ];
 
