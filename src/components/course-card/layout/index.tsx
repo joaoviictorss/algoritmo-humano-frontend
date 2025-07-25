@@ -17,7 +17,8 @@ export const DefaultCourseCard: React.FC<IDefaultCourseCardLayout> = ({
           alt="Imagem do curso"
           className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
           fill
-          src={course?.imageUrl || "/placeholder.png"}
+          src={course?.imageUrl || "/placeholder.jpg"}
+          unoptimized
         />
       </div>
 
@@ -65,7 +66,8 @@ export const ProgressCourseCard: React.FC<IProgressCourseCardLayout> = ({
           alt="Imagem do curso"
           className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
           fill
-          src={course?.imageUrl || "/placeholder.png"}
+          src={course?.imageUrl || "/placeholder.jpg"}
+          unoptimized
         />
       </div>
 

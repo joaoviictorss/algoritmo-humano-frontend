@@ -61,10 +61,11 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import type { Course } from "@/types";
+import { formatDate } from "@/utils";
 
 export interface TableAction {
   id: string;
-  label: string;
+  label: string | ((course: Course) => string);
   icon?: React.ReactNode;
   onClick: (course: Course) => void;
   variant?: "default" | "destructive";
@@ -107,22 +108,6 @@ const statusFilterFn: FilterFn<Course> = (
   return filterValue.includes(status);
 };
 
-const formatDuration = (minutes: number): string => {
-  const hours = Math.floor(minutes / 60);
-  const remainingMinutes = minutes % 60;
-  return hours > 0
-    ? `${hours}h ${remainingMinutes}min`
-    : `${remainingMinutes}min`;
-};
-
-const formatDate = (date: Date): string => {
-  return new Intl.DateTimeFormat("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  }).format(new Date(date));
-};
-
 const TitleCell = ({ row }: { row: Row<Course> }) => (
   <div className="min-w-0 space-y-1">
     <div className="font-semibold text-foreground leading-tight">
@@ -148,7 +133,7 @@ const StatusCell = ({ row }: { row: Row<Course> }) => {
 
 const DurationCell = ({ row }: { row: Row<Course> }) => (
   <span className="font-medium text-foreground tabular-nums">
-    {formatDuration(row.getValue("duration"))}
+    {`${(row.getValue("duration") || 0).toString()} Horas`}
   </span>
 );
 
@@ -173,7 +158,10 @@ const RowActions = ({
 }) => {
   const dropdownOptions = actions.map((action) => ({
     id: action.id,
-    label: action.label,
+    label:
+      typeof action.label === "function"
+        ? action.label(row.original)
+        : action.label,
     icon: action.icon,
     selected: false,
     action: () => action.onClick(row.original),
@@ -246,14 +234,34 @@ const createColumns = (actions: TableAction[] = []): ColumnDef<Course>[] => [
 
 const LoadingSkeleton = ({ actions }: { actions: TableAction[] }) => (
   <div className="space-y-4">
+    {/* Filtros desabilitados durante o loading */}
     <div className="flex flex-wrap items-center justify-between gap-3">
       <div className="flex items-center gap-3">
-        <div className="h-10 w-60 animate-pulse rounded bg-muted/50" />
-        <div className="h-10 w-20 animate-pulse rounded bg-muted/50" />
-        <div className="h-10 w-16 animate-pulse rounded bg-muted/50" />
+        <div className="relative">
+          <Input
+            aria-label="Filtrar por título ou descrição"
+            className="bg-white"
+            disabled
+            leftIcon={<ListFilterIcon aria-hidden="true" size={16} />}
+            placeholder="Buscar por título do curso..."
+            shouldShowError={false}
+            type="text"
+          />
+        </div>
+
+        <Button className="text-muted-foreground" disabled variant="outline">
+          <FilterIcon aria-hidden="true" size={16} />
+          Status
+        </Button>
+
+        <Button className="text-muted-foreground" disabled variant="outline">
+          <Columns3Icon aria-hidden="true" size={16} />
+          Visualizar
+        </Button>
       </div>
     </div>
 
+    {/* Tabela de loading */}
     <div className="overflow-hidden rounded-md border bg-background">
       <Table className="table-fixed">
         <TableHeader>
@@ -330,7 +338,6 @@ const TableFilters = ({
         <Input
           aria-label="Filtrar por título ou descrição"
           className="bg-white"
-          disabled={table.getRowModel().rows?.length === 0}
           leftIcon={<ListFilterIcon aria-hidden="true" size={16} />}
           onChange={(e) =>
             table.getColumn("title")?.setFilterValue(e.target.value)

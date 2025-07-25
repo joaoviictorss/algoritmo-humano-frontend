@@ -85,17 +85,9 @@ export const CourseSearch = ({
                               alt={course.title}
                               className="object-cover"
                               fill
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.style.display = "none";
-                                const fallback = target.parentElement
-                                  ?.nextElementSibling as HTMLElement;
-                                if (fallback) {
-                                  fallback.classList.remove("hidden");
-                                }
-                              }}
                               sizes="64px"
                               src={course.imageUrl}
+                              unoptimized
                             />
                           </div>
                         ) : null}

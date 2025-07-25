@@ -15,7 +15,6 @@ export interface Course {
     name: string | null;
     email: string;
   };
-  
 }
 
 export interface CoursesResponse {

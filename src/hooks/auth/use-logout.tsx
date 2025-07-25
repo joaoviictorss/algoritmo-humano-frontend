@@ -14,9 +14,7 @@ export const useLogout = () => {
     onSuccess: () => {
       toast.success("Logout realizado com sucesso");
 
-      queryClient.invalidateQueries({
-        queryKey: ["auth", "user"],
-      });
+      queryClient.invalidateQueries();
 
       router.push("/sign-in");
     },

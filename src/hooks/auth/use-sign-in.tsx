@@ -23,9 +23,7 @@ export const useSignIn = () => {
 
         toast.success("Login realizado com sucesso");
 
-        queryClient.invalidateQueries({
-          queryKey: ["auth", "user"],
-        });
+        queryClient.invalidateQueries();
 
         router.push("/");
       }

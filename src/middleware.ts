@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("token");
 
   const authPages = ["/sign-in", "/sign-up"];
-  const protectedPages = ["/dashboard"];
+  const protectedPages = ["/gerenciar-cursos"];
 
   const isAuthPage = authPages.some(
     (page) => request.nextUrl.pathname === page

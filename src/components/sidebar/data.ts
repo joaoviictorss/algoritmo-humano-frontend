@@ -7,6 +7,7 @@ export interface ISidebarLayout extends ISidebarProps {
   items: ISidebarItem[];
   user?: IUser | null;
   userOptions: DropdownOption[];
+  isLoading?: boolean;
 }
 
 interface ISidebarItem {
@@ -14,4 +15,5 @@ interface ISidebarItem {
   url: string;
   icon: React.ReactNode;
   isActive: boolean;
+  shouldRender?: boolean;
 }

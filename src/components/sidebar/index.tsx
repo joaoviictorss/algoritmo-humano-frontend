@@ -9,7 +9,7 @@ import { Sidebar as Layout } from "./layout";
 
 export const Sidebar = (props: ISidebarProps) => {
   const pathname = usePathname();
-  const { user } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth();
 
   const { mutateAsync: logout } = useLogout();
 
@@ -19,12 +19,14 @@ export const Sidebar = (props: ISidebarProps) => {
       url: "/",
       icon: <MonitorPlay />,
       isActive: pathname === "/",
+      shouldRender: true,
     },
     {
       title: "Gerenciar meus cursos",
       url: "/gerenciar-cursos",
       icon: <LaptopMinimal />,
       isActive: pathname === "/gerenciar-cursos",
+      shouldRender: !!isAuthenticated,
     },
   ];
 
@@ -48,6 +50,7 @@ export const Sidebar = (props: ISidebarProps) => {
     user,
     userOptions,
     logout,
+    isLoading,
     ...props,
   };
 

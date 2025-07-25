@@ -15,10 +15,16 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSkeleton,
 } from "@/components/ui/sidebar";
 import type { ISidebarLayout } from "../data";
 
-export const Sidebar = ({ items, user, userOptions }: ISidebarLayout) => {
+export const Sidebar = ({
+  items,
+  user,
+  userOptions,
+  isLoading,
+}: ISidebarLayout) => {
   return (
     <ShadSidebar>
       <SidebarContent>
@@ -30,6 +36,7 @@ export const Sidebar = ({ items, user, userOptions }: ISidebarLayout) => {
                 className="rounded-md"
                 height={32}
                 src="/nevoa.png"
+                unoptimized
                 width={32}
               />
 
@@ -41,54 +48,71 @@ export const Sidebar = ({ items, user, userOptions }: ISidebarLayout) => {
           <SidebarGroupContent>
             <SidebarGroupLabel>Menu</SidebarGroupLabel>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={item.isActive}>
-                    <Link
-                      className="flex gap-3 font-medium text-sidebar-foreground/80"
-                      href={item.url}
-                    >
-                      {item.icon}
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {isLoading ? (
+                // Mostra skeletons enquanto carrega
+                <>
+                  <SidebarMenuSkeleton showIcon />
+                  <SidebarMenuSkeleton showIcon />
+                </>
+              ) : (
+                // Mostra os itens reais quando carregado
+                items.map(
+                  (item) =>
+                    item.shouldRender && (
+                      <SidebarMenuItem key={item.title}>
+                        <SidebarMenuButton asChild isActive={item.isActive}>
+                          <Link
+                            className="flex gap-3 font-medium text-sidebar-foreground/80"
+                            href={item.url}
+                          >
+                            {item.icon}
+                            <span>{item.title}</span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    )
+                )
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter>
-        <SidebarMenuButton asChild>
-          {user ? (
-            <Dropdown align="center" options={userOptions} side="top">
-              <SidebarMenuButton>
-                <div className="flex size-7 items-center justify-center rounded-full bg-zinc-200 p-1.5">
-                  {user.avatar_url ? (
-                    <Image
-                      alt="Avatar"
-                      height={32}
-                      src={user.avatar_url}
-                      width={32}
-                    />
-                  ) : (
-                    <User size={32} />
-                  )}
-                </div>
-                {user.name}
-              </SidebarMenuButton>
-            </Dropdown>
-          ) : (
-            <Link
-              className="flex gap-3 font-medium text-sidebar-foreground/80"
-              href={"sign-in"}
-            >
-              <LogIn />
-              <span>Fazer login</span>
-            </Link>
-          )}
-        </SidebarMenuButton>
+        {isLoading ? (
+          <SidebarMenuSkeleton />
+        ) : (
+          <SidebarMenuButton asChild>
+            {user ? (
+              <Dropdown align="center" options={userOptions} side="top">
+                <SidebarMenuButton>
+                  <div className="flex size-7 items-center justify-center rounded-full bg-zinc-200 p-1.5">
+                    {user.avatar_url ? (
+                      <Image
+                        alt="Avatar"
+                        height={32}
+                        src={user.avatar_url}
+                        unoptimized
+                        width={32}
+                      />
+                    ) : (
+                      <User size={32} />
+                    )}
+                  </div>
+                  {user.name}
+                </SidebarMenuButton>
+              </Dropdown>
+            ) : (
+              <Link
+                className="flex gap-3 font-medium text-sidebar-foreground/80"
+                href={"sign-in"}
+              >
+                <LogIn />
+                <span>Fazer login</span>
+              </Link>
+            )}
+          </SidebarMenuButton>
+        )}
       </SidebarFooter>
     </ShadSidebar>
   );

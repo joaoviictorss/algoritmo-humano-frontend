@@ -29,12 +29,6 @@ export default function Home() {
 
   const sortByOptions: DropdownOption[] = [
     {
-      id: "title",
-      label: "Título",
-      selected: currentSortBy === "title",
-      action: () => handleSortChange("title", currentSortOrder),
-    },
-    {
       id: "createdAt",
       label: "Data de Criação",
       selected: currentSortBy === "createdAt",
@@ -45,6 +39,12 @@ export default function Home() {
       label: "Última Atualização",
       selected: currentSortBy === "updatedAt",
       action: () => handleSortChange("updatedAt", currentSortOrder),
+    },
+    {
+      id: "title",
+      label: "Título",
+      selected: currentSortBy === "title",
+      action: () => handleSortChange("title", currentSortOrder),
     },
     {
       id: "duration",
