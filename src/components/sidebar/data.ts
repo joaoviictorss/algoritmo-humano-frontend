@@ -3,7 +3,7 @@ import type { DropdownOption } from "../dropdown";
 
 export interface ISidebarProps {}
 
-export interface ISidebarData extends ISidebarProps {
+export interface ISidebarLayout extends ISidebarProps {
   items: ISidebarItem[];
   user?: IUser | null;
   userOptions: DropdownOption[];

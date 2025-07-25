@@ -9,7 +9,8 @@
         "noUnknownAtRule": "info"
       },
       "suspicious": {
-        "noEmptyInterface": "off"
+        "noEmptyInterface": "off",
+        "noArrayIndexKey": "off"
       },
       "performance": {
         "noNamespaceImport": "off"

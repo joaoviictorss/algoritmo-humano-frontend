@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components";
 import { Button } from "@/components/ui/button";
-import { useSignIn } from "@/hooks/auth";
+import { useSignIn } from "@/hooks";
 import { SignInFormSchema, type signInSchema } from "@/utils/validations";
 
 export default function SignInPage() {

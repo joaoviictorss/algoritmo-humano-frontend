@@ -2,8 +2,8 @@
 
 import { LogOut, MonitorPlay, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useAuth, useLogout } from "@/hooks/auth";
-import type { DropdownOption } from "../dropdown";
+import type { DropdownOption } from "@/components/dropdown";
+import { useAuth, useLogout } from "@/hooks";
 import type { ISidebarProps } from "./data";
 import { Sidebar as Layout } from "./layout";
 

@@ -1,5 +1,6 @@
 import { Sidebar } from "@/components";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { Header } from "./components/header";
 
 export default function SiteLayout({
   children,
@@ -9,9 +10,10 @@ export default function SiteLayout({
   return (
     <SidebarProvider>
       <Sidebar />
-      <main>
-        <SidebarTrigger />
-        {children}
+      <main className="w-full bg-accent">
+        <Header />
+
+        <section className="px-6 py-4">{children}</section>
       </main>
     </SidebarProvider>
   );

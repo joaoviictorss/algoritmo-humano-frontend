@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { httpApi } from "@/infra/http/httpApi";
 import type { IUser } from "@/types/user";
 
-export function useAuth() {
+export const useAuth = () => {
   const {
     data: user,
     isLoading,
@@ -32,4 +32,4 @@ export function useAuth() {
     error,
     refetch,
   };
-}
+};

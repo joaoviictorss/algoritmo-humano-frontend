@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components";
 import { Button } from "@/components/ui/button";
+import { useSignUp } from "@/hooks";
 import { SignUpFormSchema, type signUpSchema } from "@/utils/validations";
 
 export default function SignUpPage() {
@@ -23,8 +24,10 @@ export default function SignUpPage() {
     },
   });
 
+  const { mutateAsync: signUp } = useSignUp();
+
   const handleSignUp = (data: signUpSchema) => {
-    console.log("DATA", data);
+    signUp(data);
   };
 
   return (

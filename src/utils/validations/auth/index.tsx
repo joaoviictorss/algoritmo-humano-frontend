@@ -16,11 +16,11 @@ export const SignUpFormSchema = z
     email: z.string().email({ message: "Email inválido" }).trim(),
     password: z
       .string()
-      .min(8, { message: "Senha deve ter no mínimo 8 caracteres" })
+      .min(5, { message: "Senha deve ter no mínimo 6 caracteres" })
       .trim(),
     confirmPassword: z
       .string()
-      .min(8, { message: "Senha deve ter no mínimo 8 caracteres" })
+      .min(5, { message: "Senha deve ter no mínimo 6 caracteres" })
       .trim(),
   })
   .refine((data) => data.password === data.confirmPassword, {

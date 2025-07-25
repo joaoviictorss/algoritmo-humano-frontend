@@ -16,9 +16,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import type { ISidebarData } from "../data";
+import type { ISidebarLayout } from "../data";
 
-export const Sidebar = ({ items, user, userOptions }: ISidebarData) => {
+export const Sidebar = ({ items, user, userOptions }: ISidebarLayout) => {
   return (
     <ShadSidebar>
       <SidebarContent>

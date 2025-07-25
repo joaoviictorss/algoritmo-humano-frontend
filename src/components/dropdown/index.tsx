@@ -1,32 +1,20 @@
 "use client";
 
-import type { ReactNode } from "react";
+export * from "./data";
+
+import { Check } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-export type DropdownOption = {
-  id: string;
-  label: string;
-  action: () => void;
-  icon?: ReactNode;
-};
-
-type DropdownProps = {
-  options: DropdownOption[];
-  children: ReactNode;
-  align?: "start" | "center" | "end";
-  side?: "top" | "right" | "bottom" | "left";
-  className?: string;
-};
+import type { DropdownProps } from "./data";
 
 export const Dropdown = ({
   options,
   children,
-  align = "end",
+  align = "center",
   side = "bottom",
   className = "",
 }: DropdownProps) => {
@@ -38,7 +26,11 @@ export const Dropdown = ({
       <DropdownMenuContent align={align} className="w-56" side={side}>
         {options.map((option) => (
           <DropdownMenuItem
-            className="flex w-full cursor-pointer items-center gap-2"
+            className={`flex w-full cursor-pointer items-center gap-2 ${
+              option.selected
+                ? "bg-accent font-medium text-accent-foreground"
+                : ""
+            }`}
             key={option.id}
             onClick={(e) => {
               e.preventDefault();
@@ -46,7 +38,8 @@ export const Dropdown = ({
             }}
           >
             {option.icon && <span className="">{option.icon}</span>}
-            {option.label}
+            <span className="flex-1">{option.label}</span>
+            {option.selected && <Check className="text-primary" size={16} />}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
