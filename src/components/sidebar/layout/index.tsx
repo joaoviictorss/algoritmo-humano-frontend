@@ -105,7 +105,7 @@ export const Sidebar = ({
             ) : (
               <Link
                 className="flex gap-3 font-medium text-sidebar-foreground/80"
-                href={"sign-in"}
+                href={"/sign-in"}
               >
                 <LogIn />
                 <span>Fazer login</span>

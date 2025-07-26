@@ -85,6 +85,7 @@ export default function CourseClient({ course }: { course: Course }) {
               fill
               priority
               src={course.imageUrl || "/placeholder.jpg"}
+              unoptimized
             />
             {/* Botão de play no hover */}
             <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/20 opacity-0 transition-opacity duration-200 group-hover:opacity-100">

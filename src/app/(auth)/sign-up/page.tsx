@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -13,7 +14,7 @@ export default function SignUpPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<signUpSchema>({
     resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
@@ -64,7 +65,6 @@ export default function SignUpPage() {
               error={errors.name?.message}
               required
             />
-
             <Input
               id="email"
               label="Email"
@@ -73,7 +73,6 @@ export default function SignUpPage() {
               error={errors.email?.message}
               required
             />
-
             <Input
               id="password"
               label="Senha"
@@ -83,7 +82,6 @@ export default function SignUpPage() {
               error={errors.password?.message}
               required
             />
-
             <Input
               id="confirmPassword"
               label="Confirmar Senha"
@@ -93,8 +91,10 @@ export default function SignUpPage() {
               error={errors.confirmPassword?.message}
               required
             />
-
-            <Button>Criar Conta</Button>
+            <Button disabled={isSubmitting}>
+              {isSubmitting && <Loader2 className="animate-spin" size={20} />}
+              {isSubmitting || "Criar Conta"}
+            </Button>
           </form>
 
           <div className="flex items-center justify-center gap-1">
@@ -106,10 +106,7 @@ export default function SignUpPage() {
             </Link>
           </div>
 
-          <Link
-            className="text-primary text-sm"
-            href="/"
-          >
+          <Link className="text-primary text-sm" href="/">
             Voltar para catálogo de cursos
           </Link>
         </div>

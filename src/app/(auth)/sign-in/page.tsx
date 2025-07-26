@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -13,7 +14,7 @@ export default function SignInPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<signInSchema>({
     resolver: zodResolver(SignInFormSchema),
     defaultValues: {
@@ -74,7 +75,10 @@ export default function SignInPage() {
               error={errors.password?.message}
               required
             />
-            <Button>Entrar</Button>
+            <Button disabled={isSubmitting}>
+              {isSubmitting && <Loader2 className="animate-spin" size={20} />}
+              {isSubmitting || "Entrar"}
+            </Button>
           </form>
 
           <div className="flex items-center justify-center gap-1">
@@ -86,10 +90,7 @@ export default function SignInPage() {
             </Link>
           </div>
 
-          <Link
-            className="text-primary text-sm"
-            href="/"
-          >
+          <Link className="text-primary text-sm" href="/">
             Voltar para catálogo de cursos
           </Link>
         </div>
