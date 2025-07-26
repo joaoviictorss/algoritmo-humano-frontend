@@ -29,9 +29,12 @@ const ManageCoursesPage = () => {
   const [courseToDelete, setCourseToDelete] = useState<Course | null>(null);
   const [courseToView, setCourseToView] = useState<Course | null>(null);
 
-  const { mutateAsync: createCourse } = useCreateCourse();
-  const { mutateAsync: updateCourse } = useUpdateCourse();
-  const { mutateAsync: deleteCourse } = useDeleteCourse();
+  const { mutateAsync: createCourse, isPending: isCreating } =
+    useCreateCourse();
+  const { mutateAsync: updateCourse, isPending: isUpdating } =
+    useUpdateCourse();
+  const { mutateAsync: deleteCourse, isPending: isDeleting } =
+    useDeleteCourse();
   const { mutate: changeCourseStatus } = useChangeCourseStatus();
 
   const onOpenCreateCourseModal = () => {
@@ -128,6 +131,7 @@ const ManageCoursesPage = () => {
 
       <CreateEditCourseModal
         course={selectedCourse}
+        isLoading={isCreating || isUpdating}
         isOpen={isOpenCreateEditModal}
         onClose={() => {
           setIsOpenCreateEditModal(false);
@@ -143,6 +147,7 @@ const ManageCoursesPage = () => {
       />
 
       <ConfirmModal
+        isLoading={isDeleting}
         isOpen={isConfirmModalOpen}
         message="Tem certeza que deseja deletar este curso? Esta ação não pode ser desfeita."
         onClose={() => setIsConfirmModalOpen(false)}

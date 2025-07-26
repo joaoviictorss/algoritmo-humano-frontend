@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components";
@@ -180,8 +181,10 @@ export const CreateEditCourseModal = ({
             >
               Cancelar
             </Button>
-            <Button disabled={isLoading} type="submit">
-              {buttonText}
+
+            <Button disabled={isLoading}>
+              {isLoading && <Loader2 className="animate-spin" size={20} />}
+              {isLoading || buttonText}
             </Button>
           </div>
         </form>

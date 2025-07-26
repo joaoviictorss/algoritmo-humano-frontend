@@ -41,7 +41,7 @@ npm install
 
 # Configure .env.local
 NEXT_PUBLIC_API_URL=http://localhost:3333
-NEXT_PUBLIC_BASE_URL=https://algoritmo-humano-backend.onrender.com
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 
 # Execute
 npm run dev
