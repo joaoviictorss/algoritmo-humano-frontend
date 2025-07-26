@@ -14,7 +14,7 @@ export default function SignInPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<signInSchema>({
     resolver: zodResolver(SignInFormSchema),
     defaultValues: {
@@ -23,7 +23,7 @@ export default function SignInPage() {
     },
   });
 
-  const { mutateAsync } = useSignIn();
+  const { mutateAsync, isPending } = useSignIn();
 
   const handleLogin = (data: signInSchema) => {
     mutateAsync(data);
@@ -75,9 +75,9 @@ export default function SignInPage() {
               error={errors.password?.message}
               required
             />
-            <Button disabled={isSubmitting}>
-              {isSubmitting && <Loader2 className="animate-spin" size={20} />}
-              {isSubmitting || "Entrar"}
+            <Button disabled={isPending}>
+              {isPending && <Loader2 className="animate-spin" size={20} />}
+              {isPending || "Entrar"}
             </Button>
           </form>
 

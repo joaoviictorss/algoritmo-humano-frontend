@@ -137,7 +137,7 @@ export const CreateEditCourseModal = ({
           </div>
 
           <Input
-            label="URL da Imagem (opcional)"
+            label="URL da Imagem"
             placeholder="Adicione a URL da imagem do curso"
             {...register("imageUrl")}
             error={errors.imageUrl?.message}

@@ -14,7 +14,7 @@ export default function SignUpPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<signUpSchema>({
     resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
@@ -25,7 +25,7 @@ export default function SignUpPage() {
     },
   });
 
-  const { mutateAsync: signUp } = useSignUp();
+  const { mutate: signUp, isPending } = useSignUp();
 
   const handleSignUp = (data: signUpSchema) => {
     signUp(data);
@@ -91,9 +91,9 @@ export default function SignUpPage() {
               error={errors.confirmPassword?.message}
               required
             />
-            <Button disabled={isSubmitting}>
-              {isSubmitting && <Loader2 className="animate-spin" size={20} />}
-              {isSubmitting || "Criar Conta"}
+            <Button disabled={isPending} type="submit">
+              {isPending && <Loader2 className="mr-2 animate-spin" size={20} />}
+              {isPending ? "Criando..." : "Criar Conta"}
             </Button>
           </form>
 
