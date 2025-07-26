@@ -19,7 +19,8 @@ export const useChangeCourseStatus = () => {
     onSuccess: (_, { status }) => {
       const action = status === "ACTIVE" ? "publicado" : "arquivado";
       toast.success(`Curso ${action} com sucesso`);
-      queryClient.invalidateQueries({ queryKey: ["my-courses", "courses"] });
+      queryClient.invalidateQueries({ queryKey: ["my-courses"] });
+      queryClient.invalidateQueries({ queryKey: ["courses"] });
     },
     onError: (error, { status }) => {
       const action = status === "ACTIVE" ? "publicar" : "arquivar";

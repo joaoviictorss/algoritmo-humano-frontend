@@ -19,7 +19,8 @@ export const useCreateCourse = () => {
     onSuccess: (data) => {
       toast.success(data.displayMessage || "Curso criado com sucesso");
 
-      queryClient.invalidateQueries({ queryKey: ["my-courses", "courses"] });
+      queryClient.invalidateQueries({ queryKey: ["my-courses"] });
+      queryClient.invalidateQueries({ queryKey: ["courses"] });
     },
     onError: (error) => {
       toast.error(getErrorMessage(error, "Erro ao criar curso"));

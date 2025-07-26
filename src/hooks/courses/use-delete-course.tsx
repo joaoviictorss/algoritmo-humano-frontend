@@ -11,7 +11,8 @@ export const useDeleteCourse = () => {
       await httpApi.delete(`/courses/${slug}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["my-courses", "courses"] });
+      queryClient.invalidateQueries({ queryKey: ["my-courses"] });
+      queryClient.invalidateQueries({ queryKey: ["courses"] });
     },
     onError: (error) => {
       toast.error(getErrorMessage(error, "Erro ao deletar curso"));

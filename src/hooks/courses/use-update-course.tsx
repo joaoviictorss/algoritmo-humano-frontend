@@ -19,7 +19,8 @@ export const useUpdateCourse = () => {
     onSuccess: () => {
       toast.success("Curso atualizado com sucesso");
 
-      queryClient.invalidateQueries({ queryKey: ["my-courses", "courses"] });
+      queryClient.invalidateQueries({ queryKey: ["my-courses"] });
+      queryClient.invalidateQueries({ queryKey: ["courses"] });
     },
     onError: (error) => {
       toast.error(getErrorMessage(error, "Erro ao atualizar curso"));
