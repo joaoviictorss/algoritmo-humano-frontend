@@ -5,7 +5,7 @@ import { createMetadata, env } from "@/utils";
 import CourseClient from "./components/course-client";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 async function getCourse(slug: string): Promise<Course | null> {
